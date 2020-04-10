@@ -21,11 +21,12 @@ public class ChickenController {
         Command command = Command.of(InputView.inputCommand());
 
         while (!command.equals(Command.EXIT)) {
-            if (command.equals(Command.ORDER)) {
-                order();
-            }
-            if (command.equals(Command.PAY)) {
-                pay();
+            switch (command) {
+                case ORDER:
+                    order();
+                    break;
+                case PAY:
+                    pay();
             }
             OutputView.printCommandList();
             command = Command.of(InputView.inputCommand());
@@ -33,26 +34,31 @@ public class ChickenController {
     }
 
     public void order() {
-        OutputView.printTables(tables);
-        int tableNumber = InputView.inputTableNumber();
+        int tableNumber = selectTable();
         Table table = TableRepository.find(tableNumber);
+
         OutputView.printMenus(menus);
         int menuNumber = InputView.inputMenuNumber();
+
         Menu menu = MenuRepository.find(menuNumber);
         int menuCount = InputView.inputMenuCount();
         table.add(menu, menuCount);
     }
 
     public void pay() {
-        OutputView.printTables(tables);
-        int tableNumber = InputView.inputTableNumber();
+        int tableNumber = selectTable();
         Table table = TableRepository.find(tableNumber);
-        if (!table.needToPay()) {
-            throw new IllegalArgumentException("결제할 항목이 없습니다.");
-        }
+        table.validatePayment();
+
         OutputView.printOrderedMenus(table.getMenus());
         Payment payment = Payment.of(InputView.inputPayment(tableNumber));
+
         int payAmount = DiscountMachine.calculate(table.getMenus(), payment);
         OutputView.printPayAmount(payAmount);
+    }
+
+    private int selectTable() {
+        OutputView.printTables(tables);
+        return InputView.inputTableNumber();
     }
 }

@@ -25,12 +25,14 @@ public class Table {
         return menus.isOrderable(menu, menuSize);
     }
 
-    public double calculate() {
-        return menus.calculate();
-    }
-
     public boolean needToPay() {
         return !menus.isEmpty();
+    }
+
+    public void validatePayment() {
+        if (!needToPay()) {
+            throw new IllegalArgumentException("결제할 항목이 없습니다.");
+        }
     }
 
     public boolean isSameTable(int tableNumber) {

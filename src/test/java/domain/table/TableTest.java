@@ -20,14 +20,6 @@ class TableTest {
         menu = MenuRepository.menus().get(1);
     }
 
-    @DisplayName("테이블에 메뉴 추가")
-    @Test
-    void addMenu() {
-        table.add(menu, 1);
-
-        assertThat(table.calculate()).isEqualTo(16_000);
-    }
-
     @DisplayName("테이블에 메뉴 99개 이상 주문 시 예외 발생")
     @Test
     void addMenuOver99() {
@@ -39,15 +31,21 @@ class TableTest {
     @Test
     void needToPay() {
         table.add(menu, 1);
+        table.validatePayment();
 
         assertThat(table.needToPay()).isTrue();
     }
 
-    @DisplayName("결제가 필요한지 확인")
+    @DisplayName("결제할 수 있는 테이블인지 확인 (결제 불가)")
     @Test
-    void NoNeedToPay() {
-        Table table2 = TableRepository.tables().get(2);
+    void validatePayment() {
+        assertThatThrownBy(() -> table.validatePayment())
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 
-        assertThat(table2.needToPay()).isFalse();
+    @DisplayName("테이블 출력")
+    @Test
+    void toStringTest() {
+        assertThat(table.toString()).isEqualTo("2");
     }
 }
