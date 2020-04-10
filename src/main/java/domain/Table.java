@@ -1,5 +1,9 @@
 package domain;
 
+import domain.discount.MenuSize;
+
+import java.util.Map;
+
 public class Table {
     private final int number;
     private final Menus menus;
@@ -7,11 +11,6 @@ public class Table {
     public Table(final int number) {
         this.number = number;
         this.menus = new Menus();
-    }
-
-    @Override
-    public String toString() {
-        return Integer.toString(number);
     }
 
     public void add(Menu menu, int menuSize) {
@@ -31,5 +30,18 @@ public class Table {
 
     public boolean needToPay() {
         return !menus.isEmpty();
+    }
+
+    public boolean isSameTable(int tableNumber) {
+        return this.number == tableNumber;
+    }
+
+    public Menus getMenus() {
+        return menus;
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(number);
     }
 }

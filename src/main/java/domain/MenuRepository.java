@@ -18,6 +18,13 @@ public class MenuRepository {
         menus.add(new Menu(22, "사이다", Category.BEVERAGE, 1_000));
     }
 
+    public static Menu find(int menuNumber) {
+        return menus.stream()
+                .filter(menu -> menu.isSameMenu(menuNumber))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format("%d는 잘못된 메뉴 번호입니다.", menuNumber)));
+    }
+
     public static List<Menu> menus() {
         return Collections.unmodifiableList(menus);
     }

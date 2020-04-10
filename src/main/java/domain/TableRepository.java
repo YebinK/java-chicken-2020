@@ -16,6 +16,13 @@ public class TableRepository {
         tables.add(new Table(8));
     }
 
+    public static Table find(int tableNumber) {
+        return tables.stream()
+                .filter(table -> table.isSameTable(tableNumber))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format("%d는 잘못된 테이븗 번호입니다.", tableNumber)));
+    }
+
     public static List<Table> tables() {
         return Collections.unmodifiableList(tables);
     }

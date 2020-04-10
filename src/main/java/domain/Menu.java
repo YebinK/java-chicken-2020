@@ -21,6 +21,14 @@ public class Menu {
         return category == Category.CHICKEN;
     }
 
+    public boolean isSameMenu(int menuNumber) {
+        return this.number == menuNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return category + " " + number + " - " + name + " : " + price + "원";

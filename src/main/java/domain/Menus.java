@@ -15,7 +15,11 @@ public class Menus {
     }
 
     public boolean isOrderable(Menu menu, int menuSize) {
-        return !(menus.containsKey(menu) && menus.get(menu).get() + menuSize > MAX_MENU_SIZE);
+        int orderedSize = 0;
+        if (menus.containsKey(menu)) {
+            orderedSize = menus.get(menu).get();
+        }
+        return orderedSize + menuSize < MAX_MENU_SIZE;
     }
 
     public void add(Menu menu, int menuSize) {
