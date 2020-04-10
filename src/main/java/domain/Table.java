@@ -38,4 +38,10 @@ public class Table {
 
         return payAmount;
     }
+
+    public boolean needToPay() {
+        return !menus.isEmpty();
+    }
+
+
 }
