@@ -1,8 +1,11 @@
 package controller;
 
-import domain.*;
 import domain.discount.DiscountMachine;
 import domain.discount.Payment;
+import domain.menu.Menu;
+import domain.menu.MenuRepository;
+import domain.table.Table;
+import domain.table.TableRepository;
 import view.InputView;
 import view.OutputView;
 
@@ -47,9 +50,9 @@ public class ChickenController {
         if (!table.needToPay()) {
             throw new IllegalArgumentException("결제할 항목이 없습니다.");
         }
-        OutputView.printOrderedMenus(table.getMenus().get());
+        OutputView.printOrderedMenus(table.getMenus());
         Payment payment = Payment.of(InputView.inputPayment(tableNumber));
-        double payAmount = DiscountMachine.calculate(table.getMenus(), payment);
+        int payAmount = DiscountMachine.calculate(table.getMenus(), payment);
         OutputView.printPayAmount(payAmount);
     }
 }

@@ -1,8 +1,9 @@
 package view;
 
-import domain.Menu;
-import domain.Table;
-import domain.discount.MenuSize;
+import domain.menu.Menu;
+import domain.menu.Menus;
+import domain.table.Table;
+import domain.menu.MenuSize;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,7 @@ public class OutputView {
     private static final String TOP_LINE = "┌ ─ ┐";
     private static final String TABLE_FORMAT = "| %s |";
     private static final String BOTTOM_LINE = "└ ─ ┘";
-    private static final String BOTTOM_LINE_ORDERED = "└ \\ ┘";
+    private static final String BOTTOM_LINE_ORDERED = "└ ￦ ┘";
 
     public static void printCommandList() {
         System.out.println("## 메인 화면");
@@ -34,12 +35,13 @@ public class OutputView {
         }
     }
 
-    public static void printOrderedMenus(final Map<Menu, MenuSize> menus) {
+    public static void printOrderedMenus(final Menus menus) {
         System.out.println("메뉴  \t수량 \t금액");
-        for (Map.Entry<Menu, MenuSize> entry : menus.entrySet()) {
+
+        for (Map.Entry<Menu, MenuSize> entry : menus.get().entrySet()) {
             String menuName = entry.getKey().getName();
             int menuCount = entry.getValue().get();
-            int price = entry.getKey().getPrice() * menuCount;
+            int price = menus.sumAndDiscount(entry.getKey(), entry.getValue());
             System.out.println(menuName + "\t" + menuCount + "\t" + price);
         }
     }
@@ -69,7 +71,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printPayAmount(double payAmount) {
+    public static void printPayAmount(int payAmount) {
         System.out.println("## 최종 결제할 금액");
         System.out.println(payAmount + "원");
     }

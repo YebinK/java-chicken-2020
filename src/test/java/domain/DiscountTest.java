@@ -2,6 +2,9 @@ package domain;
 
 import domain.discount.DiscountMachine;
 import domain.discount.Payment;
+import domain.menu.Menu;
+import domain.menu.MenuRepository;
+import domain.menu.Menus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

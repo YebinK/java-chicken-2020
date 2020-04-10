@@ -1,8 +1,7 @@
-package domain;
+package domain.table;
 
-import domain.discount.MenuSize;
-
-import java.util.Map;
+import domain.menu.Menu;
+import domain.menu.Menus;
 
 public class Table {
     private final int number;

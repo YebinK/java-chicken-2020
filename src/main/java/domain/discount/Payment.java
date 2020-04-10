@@ -1,8 +1,5 @@
 package domain.discount;
 
-import domain.Command;
-import domain.Menu;
-
 import java.util.Arrays;
 
 public enum Payment {
@@ -25,6 +22,6 @@ public enum Payment {
     }
 
     public int discount(int payAmount) {
-        return (int) this.discountRate * payAmount;
+        return (int) (this.discountRate * payAmount);
     }
 }

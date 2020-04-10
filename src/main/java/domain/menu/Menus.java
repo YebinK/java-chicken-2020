@@ -1,6 +1,4 @@
-package domain;
-
-import domain.discount.MenuSize;
+package domain.menu;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +6,7 @@ import java.util.Map;
 public class Menus {
     private static final int MAX_MENU_SIZE = 99;
 
-    private Map<Menu, MenuSize> menus;
+    private final Map<Menu, MenuSize> menus;
 
     public Menus() {
         this.menus = new HashMap<>();
@@ -29,9 +27,17 @@ public class Menus {
     public int calculate() {
         int payAmount = 0;
         for (Map.Entry<Menu, MenuSize> entry : menus.entrySet()) {
-            payAmount = entry.getKey().getPrice() * entry.getValue().get();
+            payAmount += sumAndDiscount(entry.getKey(), entry.getValue());
         }
         return payAmount;
+    }
+
+    public int sumAndDiscount(Menu menu, MenuSize menuSize) {
+        int price = menu.getPrice() * menuSize.get();
+        if (menu.isChicken()) {
+            price -= menuSize.discount();
+        }
+        return price;
     }
 
     public boolean isEmpty() {

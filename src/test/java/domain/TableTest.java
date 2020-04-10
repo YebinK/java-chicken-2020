@@ -1,5 +1,9 @@
 package domain;
 
+import domain.menu.Menu;
+import domain.menu.MenuRepository;
+import domain.table.Table;
+import domain.table.TableRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
