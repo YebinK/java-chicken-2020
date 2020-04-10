@@ -1,4 +1,4 @@
-package domain;
+package domain.discount;
 
 public enum Payment {
     CARD(1),
@@ -10,7 +10,7 @@ public enum Payment {
         this.discountRate = discountRate;
     }
 
-    public double apply(int payAmount) {
+    public double discount(int payAmount) {
         return this.discountRate * payAmount;
     }
 }
