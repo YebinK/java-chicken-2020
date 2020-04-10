@@ -3,6 +3,8 @@ package domain.table;
 import domain.menu.Menu;
 import domain.menu.Menus;
 
+import java.util.Objects;
+
 public class Table {
     private final int number;
     private final Menus menus;
@@ -37,6 +39,19 @@ public class Table {
 
     public Menus getMenus() {
         return menus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Table table = (Table) o;
+        return number == table.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number, menus);
     }
 
     @Override

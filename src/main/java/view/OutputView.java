@@ -1,9 +1,9 @@
 package view;
 
 import domain.menu.Menu;
+import domain.menu.MenuSize;
 import domain.menu.Menus;
 import domain.table.Table;
-import domain.menu.MenuSize;
 
 import java.util.List;
 import java.util.Map;
