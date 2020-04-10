@@ -1,9 +1,6 @@
 package controller;
 
-import domain.Menu;
-import domain.MenuRepository;
-import domain.Table;
-import domain.TableRepository;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 
@@ -16,14 +13,24 @@ public class ChickenController {
 
     public void run() {
         OutputView.printCommandList();
-        int whatToDo = InputView.inputCommand();
+        Command command = Command.of(InputView.inputCommand());
 
-        while (whatToDo != 3) {
-            OutputView.printTables(tables);
-
-            final int tableNumber = InputView.inputTableNumber();
-
-            OutputView.printMenus(menus);
+        while (!command.equals(Command.EXIT)) {
+            if (command.equals(Command.ORDER)) {
+                order();
+            }
+            if (command.equals(Command.PAY)) {
+                pay();
+            }
         }
+    }
+
+    public void order() {
+        OutputView.printTables(tables);
+        final int tableNumber = InputView.inputTableNumber();
+        OutputView.printMenus(menus);
+    }
+
+    public void pay() {
     }
 }
